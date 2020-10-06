@@ -90,7 +90,7 @@ def winner(board)
 end
 
 def play(board)
-  while over? == false
+  while over?(board) == false
     turn
   end
   if won?
