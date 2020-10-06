@@ -40,17 +40,6 @@ def valid_move?(board, index)
 end
 
 def turn_count(board)
-   counter = 0
-   board.each do |spaces|
-      if spaces == "X" || spaces == "O"
-         counter += 1
-      end
-   end
-   counter
-end
-
-
-def turn_count(board)
   # board.count{|token| token == "X" || token == "O"}
   turns = 0
   board.each do |token|
