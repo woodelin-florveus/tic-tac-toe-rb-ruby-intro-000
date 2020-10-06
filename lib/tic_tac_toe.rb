@@ -111,7 +111,7 @@ def winner(board)
   end
 end
 
-board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+
 
 def play(board)
   until over?(board)
