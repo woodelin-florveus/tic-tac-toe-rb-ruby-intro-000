@@ -17,33 +17,27 @@ def display_board(board)
   puts " #{board[6]} | #{board[7]} | #{board[8]} "
 end
 
-def input_to_index(user_input)
-  user_input.to_i - 1
+def move(board, location, current_player = "X")
+  board[location.to_i-1] = current_player
 end
 
-
-def move(board, index, current_player = "X")
-  board[index] = current_player
+def position_taken?(board, location)
+  board[location] != " " && board[location] != ""
 end
 
-def position_taken?(board, index)
-  board[index] != " " && board[index] != ""
-end
-
-def valid_move?(board, index)
-  index.between?(0,8) && !position_taken?(board, index)
+def valid_move?(board, position)
+  position.to_i.between?(1,9) && !position_taken?(board, position.to_i-1)
 end
 
 def turn(board)
   puts "Please enter 1-9:"
   input = gets.strip
-  index = input_to_index(input)
-  if valid_move?(board, index)
-    move(board, index)
-    display_board(board)
+  if valid_move?(board, input)
+    move(board, input, current_player(board))
   else
     turn(board)
   end
+  display_board(board)
 end
 
 def turn_count(board)
@@ -98,7 +92,7 @@ def draw?(board)
 end
 
 def over?(board)
-  if draw?(board) || won?(board) || full?(board)
+  if draw?(board) || won?(board)
     return true
   else
     return false
@@ -111,8 +105,6 @@ def winner(board)
   end
 end
 
-
-
 def play(board)
   until over?(board)
     current_player(board)
@@ -121,6 +113,6 @@ def play(board)
   if won?(board)
     puts "Congratulations #{winner(board)}!"
   else
-    puts "Cat's Game!"
+    puts "Cats Game!"
   end
 end
